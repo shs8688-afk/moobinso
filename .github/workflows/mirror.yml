@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Install mirror script dependencies
+        run: npm install
+        working-directory: mirror-scripts
+
       - name: Remove previous snapshot
         run: rm -rf site
 

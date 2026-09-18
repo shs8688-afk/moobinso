@@ -4,38 +4,67 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const sharp = require("sharp");
 
 const ORIGIN = "https://www.moobinso.com";
 const OUT_DIR = path.resolve(__dirname, "..", "site");
 const IMAGES_DIR = path.join(OUT_DIR, "assets", "images");
 const MAX_PAGES = 120;
 const DELAY_MS = 200;
+const MAX_IMAGE_WIDTH = 1600;
+const WEBP_QUALITY = 78;
 
 // Pages embed photos as inline base64 data URIs, which bloats each
-// HTML file to hundreds of KB-1.5MB. Pull those out into real files
-// under assets/images/ (deduped by content hash) and replace the
-// data URI with a relative path, so the saved HTML stays small and
-// readable while the actual pixels are still byte-for-byte identical.
+// HTML file to hundreds of KB-1.5MB. Pull those out, downscale/
+// recompress to WebP, and write them to assets/images/ (deduped by
+// content hash of the OPTIMIZED bytes), replacing the data URI with
+// a relative path. Keeps every page's HTML small and readable while
+// shrinking the actual image payloads too.
 const DATA_URI_RE = /data:(image\/(?:jpeg|png|webp|gif));base64,([A-Za-z0-9+/=]+)/g;
 const EXT_BY_MIME = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" };
 
-function extractInlineImages(html, pageFilePath) {
+async function compressImage(buf, mime) {
+  try {
+    const meta = await sharp(buf).metadata();
+    let pipeline = sharp(buf).rotate();
+    if (meta.width && meta.width > MAX_IMAGE_WIDTH) {
+      pipeline = pipeline.resize({ width: MAX_IMAGE_WIDTH });
+    }
+    const optimized = await pipeline.webp({ quality: WEBP_QUALITY }).toBuffer();
+    if (optimized.length < buf.length) return { buffer: optimized, ext: "webp" };
+  } catch (e) {
+    console.log(`  (image compress skipped: ${e.message})`);
+  }
+  return { buffer: buf, ext: EXT_BY_MIME[mime] };
+}
+
+async function extractInlineImages(html, pageFilePath) {
   const pageDir = path.dirname(pageFilePath);
   const relDir = path.relative(OUT_DIR, pageDir);
   const depth = relDir === "" ? 0 : relDir.split(path.sep).length;
   const prefix = depth === 0 ? "" : "../".repeat(depth);
 
-  return html.replace(DATA_URI_RE, (match, mime, b64) => {
-    const buf = Buffer.from(b64, "base64");
-    const hash = crypto.createHash("sha1").update(buf).digest("hex").slice(0, 16);
-    const filename = `${hash}.${EXT_BY_MIME[mime]}`;
+  const uniqueMatches = [...new Set([...html.matchAll(DATA_URI_RE)].map((m) => m[0]))];
+  if (uniqueMatches.length === 0) return html;
+
+  const replacements = new Map();
+  for (const full of uniqueMatches) {
+    const m = new RegExp(DATA_URI_RE.source).exec(full);
+    const [, mime, b64] = m;
+    const original = Buffer.from(b64, "base64");
+    const { buffer, ext } = await compressImage(original, mime);
+    const hash = crypto.createHash("sha1").update(buffer).digest("hex").slice(0, 16);
+    const filename = `${hash}.${ext}`;
     const outPath = path.join(IMAGES_DIR, filename);
     if (!fs.existsSync(outPath)) {
       fs.mkdirSync(IMAGES_DIR, { recursive: true });
-      fs.writeFileSync(outPath, buf);
+      fs.writeFileSync(outPath, buffer);
     }
-    return `${prefix}assets/images/${filename}`;
-  });
+    console.log(`  image ${(original.length / 1024).toFixed(0)}KB -> ${(buffer.length / 1024).toFixed(0)}KB  ${filename}`);
+    replacements.set(full, `${prefix}assets/images/${filename}`);
+  }
+
+  return html.replace(DATA_URI_RE, (full) => replacements.get(full));
 }
 
 const seedPaths = [
@@ -159,7 +188,7 @@ async function crawlPages() {
       const finalUrl = res.url && isSameOrigin(res.url) ? res.url : url;
       const filePath = localFilePathForPage(new URL(finalUrl).pathname);
       ensureDirFor(filePath);
-      const cleanedHtml = extractInlineImages(text, filePath);
+      const cleanedHtml = await extractInlineImages(text, filePath);
       fs.writeFileSync(filePath, cleanedHtml, "utf8");
       console.log(`PAGE  ${res.status}  ${pathname}  ->  ${path.relative(OUT_DIR, filePath)}`);
 
@@ -214,12 +243,45 @@ async function crawlAssets() {
   }
 }
 
+async function fetchWellKnownFiles() {
+  const textFiles = ["/robots.txt", "/sitemap.xml"];
+  for (const p of textFiles) {
+    try {
+      const { res, text } = await fetchText(new URL(p, ORIGIN).toString());
+      if (res.status >= 400) { errors.push(`WELLKNOWN ${res.status} ${p}`); continue; }
+      const filePath = localFilePathForAsset(p);
+      ensureDirFor(filePath);
+      fs.writeFileSync(filePath, text, "utf8");
+      console.log(`WELLKNOWN ${res.status}  ${p}`);
+    } catch (e) {
+      errors.push(`WELLKNOWN ERR ${p}: ${e.message}`);
+    }
+    await sleep(DELAY_MS);
+  }
+
+  try {
+    const { res, buf } = await fetchBuffer(new URL("/og-image.jpg", ORIGIN).toString());
+    if (res.status < 400) {
+      const { buffer, ext } = await compressImage(buf, "image/jpeg");
+      const filePath = path.join(OUT_DIR, `og-image.${ext}`);
+      fs.writeFileSync(filePath, buffer);
+      console.log(`WELLKNOWN ${res.status}  /og-image.jpg -> og-image.${ext}  (${(buf.length / 1024).toFixed(0)}KB -> ${(buffer.length / 1024).toFixed(0)}KB)`);
+    } else {
+      errors.push(`WELLKNOWN ${res.status} /og-image.jpg`);
+    }
+  } catch (e) {
+    errors.push(`WELLKNOWN ERR /og-image.jpg: ${e.message}`);
+  }
+}
+
 (async () => {
   fs.mkdirSync(OUT_DIR, { recursive: true });
   console.log("== Crawling pages ==");
   await crawlPages();
   console.log("\n== Downloading assets ==");
   await crawlAssets();
+  console.log("\n== Fetching well-known files ==");
+  await fetchWellKnownFiles();
 
   console.log("\n== Summary ==");
   console.log(`Pages saved:  ${visitedPages.size}`);
