@@ -3,11 +3,40 @@
 // so the actual served code can be committed to git for backup.
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const ORIGIN = "https://www.moobinso.com";
 const OUT_DIR = path.resolve(__dirname, "..", "site");
+const IMAGES_DIR = path.join(OUT_DIR, "assets", "images");
 const MAX_PAGES = 120;
 const DELAY_MS = 200;
+
+// Pages embed photos as inline base64 data URIs, which bloats each
+// HTML file to hundreds of KB-1.5MB. Pull those out into real files
+// under assets/images/ (deduped by content hash) and replace the
+// data URI with a relative path, so the saved HTML stays small and
+// readable while the actual pixels are still byte-for-byte identical.
+const DATA_URI_RE = /data:(image\/(?:jpeg|png|webp|gif));base64,([A-Za-z0-9+/=]+)/g;
+const EXT_BY_MIME = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" };
+
+function extractInlineImages(html, pageFilePath) {
+  const pageDir = path.dirname(pageFilePath);
+  const relDir = path.relative(OUT_DIR, pageDir);
+  const depth = relDir === "" ? 0 : relDir.split(path.sep).length;
+  const prefix = depth === 0 ? "" : "../".repeat(depth);
+
+  return html.replace(DATA_URI_RE, (match, mime, b64) => {
+    const buf = Buffer.from(b64, "base64");
+    const hash = crypto.createHash("sha1").update(buf).digest("hex").slice(0, 16);
+    const filename = `${hash}.${EXT_BY_MIME[mime]}`;
+    const outPath = path.join(IMAGES_DIR, filename);
+    if (!fs.existsSync(outPath)) {
+      fs.mkdirSync(IMAGES_DIR, { recursive: true });
+      fs.writeFileSync(outPath, buf);
+    }
+    return `${prefix}assets/images/${filename}`;
+  });
+}
 
 const seedPaths = [
   "/", "/guide/", "/guide/faq/", "/funeral-halls/", "/funeral-service/",
@@ -130,7 +159,8 @@ async function crawlPages() {
       const finalUrl = res.url && isSameOrigin(res.url) ? res.url : url;
       const filePath = localFilePathForPage(new URL(finalUrl).pathname);
       ensureDirFor(filePath);
-      fs.writeFileSync(filePath, text, "utf8");
+      const cleanedHtml = extractInlineImages(text, filePath);
+      fs.writeFileSync(filePath, cleanedHtml, "utf8");
       console.log(`PAGE  ${res.status}  ${pathname}  ->  ${path.relative(OUT_DIR, filePath)}`);
 
       const refs = extractRefsFromHtml(text, finalUrl);
