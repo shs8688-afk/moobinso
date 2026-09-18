@@ -302,7 +302,7 @@ img {
   width: min(520px,100%);
   max-height: calc(100vh - 154px);
   overflow-y: auto;
-  padding: 16px 24px 24px;
+  padding: 16px 24px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid rgba(41,66,56,.12);
   background: #fffdf9;
@@ -1627,7 +1627,7 @@ header {
 
 .brandLogoImg {
   display: block;
-  height: 44px;
+  height: 48.4px;
   width: auto;
 }
 

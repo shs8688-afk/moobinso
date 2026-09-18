@@ -117,9 +117,6 @@
       color:var(--ci-ink);box-sizing:border-box;
     }
     #company-intro-copyable *{box-sizing:border-box}
-    #company-intro-copyable .ci-copybar{width:min(560px,100%);margin:0 auto 10px;display:flex;justify-content:flex-end}
-    #company-intro-copyable .ci-copy-button{appearance:none;border:1px solid var(--ci-line);border-radius:6px;background:var(--ci-page);color:var(--ci-green);padding:10px 14px;font:500 13px/1.2 "Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif}
-    #company-intro-copyable .ci-copy-button:active{transform:translateY(1px)}
     #company-intro-copyable .ci-page{width:min(560px,100%);margin:0 auto;background:var(--ci-page);overflow:hidden;box-shadow:0 16px 44px light-dark(rgba(42,55,48,.09),rgba(0,0,0,.22))}
     #company-intro-copyable .ci-hero{padding:54px 28px 48px;text-align:center;background:#385a4d}
     #company-intro-copyable .ci-hero .ci-eyebrow{color:#d7b97a}
@@ -170,10 +167,6 @@
     }
   </style>
 
-  <div class="ci-copybar">
-    <button class="ci-copy-button" type="button" aria-live="polite">전체 내용 복사</button>
-  </div>
-
   <div class="ci-page">
     <header class="ci-hero">
       <p class="ci-eyebrow">ABOUT US</p>
@@ -183,8 +176,8 @@
 
     <section class="ci-section" aria-labelledby="ci-greeting">
       <p class="ci-eyebrow">CEO MESSAGE</p>
-      <h2 id="ci-greeting">우리의 장례문화에서<br>새로운 희망을 봅니다</h2>
-      <div class="ci-quote">“무빈소 늘고 ‘3시간 추모공간’까지… 달라지는 장례문화” <small>— 조선비즈</small></div>
+      <h2 id="ci-greeting">오늘, 우리의 장례에<br>새로운 희망이 시작됩니다</h2>
+      <div class="ci-quote"><a href="https://biz.chosun.com/topics/topics_social/2026/09/10/CXWFN3O5SNHRROLFOJ2A2EVYMQ/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">“무빈소 늘고 ‘3시간 추모공간’까지… 달라지는 장례문화” <small>— 조선비즈 26.9.10</small></a></div>
       <div class="ci-letter">
         <p class="ci-copy">우리의 장례문화는 지금 큰 변화의 길에 들어섰습니다. 빈소와 접객의 부담을 덜어내는 무빈소장례가 새로운 선택으로 자리 잡고 있습니다. 저는 이 변화 속에서, 오랫동안 절망적으로만 보였던 우리의 장례문화에 새로운 희망이 시작되고 있음을 보았습니다.</p>
         <p class="ci-copy">장례의 형식이 간소해지는 만큼 고인을 생각하는 마음은 더 깊어집니다. 가까운 사람들이 한자리에 모여 고인의 삶을 이야기하고, 진정한 추모와 위로를 나누는 장례도 가능합니다. 그 가능성을 현실로 만들기 위해 ‘자유와 안식’을 설립하고, 무빈소 추모장례 플랫폼 ‘이별예식장’을 시작했습니다.</p>
@@ -213,8 +206,8 @@
       <h2 id="ci-vision">이별예식장의 성장 비전</h2>
       <div class="ci-vision-diagram">
         <div class="ci-circle-group"><div class="ci-circle">무빈소 전문<br>플랫폼 구축</div><p>장례서비스 포털<br>추모식 연계 플랫폼</p></div>
-        <div class="ci-circle-group"><div class="ci-circle">이별 추모식의<br>고도화</div><p>표준화·다양화<br>플래너·디렉터 양성</p></div>
-        <div class="ci-circle-group"><div class="ci-circle">생전 서비스<br>로의 확대</div><p>나의 이별 노트<br>소원 여행·이별 파티</p></div>
+        <div class="ci-circle-group"><div class="ci-circle">이별 추모식<br>서비스 고도화</div><p>사전 준비 정착<br>플래너·디렉터 양성</p></div>
+        <div class="ci-circle-group"><div class="ci-circle">생전 기념 행사로<br>서비스 확대</div><p>나의 이별 노트<br>소원 여행·이별 파티</p></div>
       </div>
     </section>
 
@@ -247,8 +240,8 @@
 <div class="footerLinks">
 <button onclick="go(&#39;about&#39;)" type="button">회사 소개</button>
 <button onclick="go(&#39;signup&#39;)" type="button">회원가입</button>
-<button onclick="footerNotice(&#39;이용약관&#39;)" type="button">이용약관</button>
-<button onclick="footerNotice(&#39;개인정보처리방침&#39;)" type="button">개인정보처리방침</button>
+<button onclick="go(&#39;terms&#39;)" type="button">이용약관</button>
+<button onclick="go(&#39;privacy&#39;)" type="button">개인정보처리방침</button>
 <button onclick="footerNotice(&#39;장례식장 제휴 안내&#39;)" type="button">장례식장 제휴 안내</button>
 </div>
 <div class="operatorInfo">
@@ -273,32 +266,6 @@
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
     }
-    var root = document.getElementById('company-intro-copyable');
-    if (!root) return;
-    var button = root.querySelector('.ci-copy-button');
-    var page = root.querySelector('.ci-page');
-    if (!button || !page) return;
-    button.addEventListener('click', function(){
-      var text = page.innerText.replace(/\n{3,}/g, '\n\n').trim();
-      function done(){
-        button.textContent = '복사했습니다';
-        setTimeout(function(){ button.textContent = '전체 내용 복사'; }, 1800);
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done).catch(function(){
-          var area = document.createElement('textarea');
-          area.value = text;
-          area.setAttribute('readonly', '');
-          area.style.position = 'absolute';
-          area.style.left = '-9999px';
-          root.appendChild(area);
-          area.select();
-          document.execCommand('copy');
-          area.remove();
-          done();
-        });
-      }
-    });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCompanyIntro);
