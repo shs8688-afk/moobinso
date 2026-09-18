@@ -1,0 +1,40 @@
+name: Mirror moobinso.com
+
+on:
+  schedule:
+    # 매일 UTC 19:00 = 한국시간(KST) 04:00
+    - cron: "0 19 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Remove previous snapshot
+        run: rm -rf site
+
+      - name: Mirror live site
+        run: node mirror-scripts/mirror.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site/
+          if git diff --cached --quiet; then
+            echo "변경 사항 없음 — 커밋 생략"
+          else
+            git commit -m "chore: mirror moobinso.com snapshot ($(date -u +'%Y-%m-%d'))"
+            git push
+          fi
