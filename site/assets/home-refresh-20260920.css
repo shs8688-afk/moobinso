@@ -1,0 +1,112 @@
+/* Homepage image refresh, 2026-09-20. Scoped to preserve inner pages. */
+#home .heroPhotoSlider {
+  height: auto;
+  aspect-ratio: 6 / 5;
+  background: #f7f3eb;
+}
+#home .heroPhotoTrack { height: 100%; }
+#home .heroSlide .heroPhoto { object-position: center; }
+#home .heroSlideCaption.top {
+  padding: 25px 24px 48px;
+  background: linear-gradient(180deg, rgba(255,252,245,.94) 0%, rgba(255,252,245,.80) 40%, rgba(255,252,245,0) 100%);
+}
+#home .heroSlideCaption b.capSmall {
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -.03em;
+  color: #354b40;
+  text-shadow: none;
+}
+#home .heroSlideCaption span.capLarge {
+  margin-top: 5px;
+  font-family: "Nanum Myeongjo", serif;
+  font-size: 35px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -.045em;
+  color: #263d33;
+  text-shadow: none;
+}
+#home .heroDot { background: #f7f3eb; border-color: #4b6154; box-shadow: none; }
+#home .heroDot.active { background: #294238; border-color: #294238; }
+
+#home .sectionPhotoWrap,
+#home .hallSplitPhotoWrap { isolation: isolate; background: #f8f5ee; }
+#home .sectionPhotoWrap .photo,
+#home .sectionPhotoWrap .coffinPrepPhoto,
+#home .sectionPhotoWrap .wishHomePhoto,
+#home .hallSplitPhotoWrap .hallSplitPhoto {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center !important;
+  filter: none;
+  margin: 0;
+}
+#home .sectionPhotoWrap::before,
+#home .section.dark .sectionPhotoWrap::before,
+#home .hallSplitPhotoWrap::before {
+  z-index: 1;
+  height: 100px;
+  background: linear-gradient(180deg, rgba(255,252,245,.75) 0%, rgba(255,252,245,.46) 40%, rgba(255,252,245,0) 100%);
+}
+#home .section.dark .sectionPhotoWrap::before { display: none; }
+#home .sectionPhotoLabel,
+#home .coffinSectionLabel,
+#home .hallSplitPhotoWrap .sectionPhotoLabel {
+  z-index: 2;
+  top: 17px;
+  left: 18px;
+  right: 14px;
+  color: #263d33;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1.45;
+  text-shadow: none;
+  word-break: keep-all;
+}
+#home .sectionPhotoNumber {
+  display: inline-block;
+  color: #725726;
+  font-size: .78em;
+  font-weight: 700;
+  margin-right: .35em;
+  letter-spacing: .01em;
+}
+/* A full-width photo keeps the long hall title and facade readable on phones. */
+#home .hallSplitCard { grid-template-columns: 1fr; }
+#home .hallSplitPhotoWrap { height: auto; }
+#home .hallSplitBody { padding: 25px 24px; }
+#home .splitHallSection .sectionHead h2 { font-size: 30px; line-height: 1.4; }
+#home .wishHomeSparkles { display: none; }
+/* These photographs contain screen/document text: keep the page label separate. */
+#home .wishHome .sectionPhotoWrap,
+#home .benefitHome .sectionPhotoWrap { padding-top: 59px; }
+#home .wishHome .sectionPhotoWrap::before,
+#home .benefitHome .sectionPhotoWrap::before { display: none; }
+
+@media (max-width: 420px) {
+  #home .heroSlideCaption.top { padding: 20px 20px 38px; }
+  #home .heroSlideCaption b.capSmall { font-size: 15px; }
+  #home .heroSlideCaption span.capLarge { font-size: 29px; }
+  #home .sectionPhotoLabel,
+  #home .hallSplitPhotoWrap .sectionPhotoLabel { font-size: 19px; top: 14px; left: 15px; right: 12px; }
+  #home .sectionPhotoWrap::before,
+  #home .section.dark .sectionPhotoWrap::before,
+  #home .hallSplitPhotoWrap::before { height: 84px; }
+  #home .wishHome .sectionPhotoWrap,
+  #home .benefitHome .sectionPhotoWrap { padding-top: 54px; }
+  #home .hallSplitBody { padding: 22px 20px; }
+}
+@media (max-width: 360px) {
+  #home .sectionPhotoLabel,
+  #home .hallSplitPhotoWrap .sectionPhotoLabel { font-size: 18px; left: 12px; }
+  #home .heroSlideCaption span.capLarge { font-size: 27px; }
+}

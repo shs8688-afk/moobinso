@@ -1,0 +1,55 @@
+#plan .wv-intro{margin:0 18px 26px;padding:25px 22px;border:1px solid #d9ddce;border-radius:22px;background:linear-gradient(145deg,#fffdf7,#f0f3ea);color:#263d33}
+#plan .wv-intro h3{font-family:"Nanum Myeongjo",serif;font-size:25px;line-height:1.45;margin:7px 0 12px;letter-spacing:-.04em}
+#plan .wv-intro p{line-height:1.75;font-size:15px;margin:0 0 16px}
+.wv-eyebrow{font-size:12px;font-weight:700;letter-spacing:.04em;color:#766038}
+#plan .wv-intro .wv-small,#plan .wv-intro .wv-support{font-size:13px;line-height:1.65;margin:12px 0 0;color:#536053}
+.wv-primary{display:flex;justify-content:center;align-items:center;gap:10px;min-height:52px;padding:13px 17px;width:100%;background:#294238;border:1px solid #294238;color:#fff;border-radius:13px;font:700 17px/1.5 "Malgun Gothic",sans-serif;cursor:pointer}
+.wv-primary svg,.wv-mic svg{width:23px;height:23px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7}
+#plan .wv-field-button{appearance:none;display:inline-flex;align-items:center;padding:8px 12px;min-height:44px;margin:2px 0 14px;background:#f2f5ed;border:1px solid #d3dfd3;border-radius:10px;color:#294238;font:700 14px/1.5 "Malgun Gothic",sans-serif;cursor:pointer}
+#wishVoiceIntro{scroll-margin-top:110px}
+#wishVoiceDialog{box-sizing:border-box;width:min(580px,calc(100% - 24px));max-width:580px;max-height:calc(100dvh - 32px);padding:0;border:1px solid #d9ddce;border-radius:22px;background:#fffcf6;color:#263d33;box-shadow:0 20px 70px #152d3540;overflow:hidden}
+#wishVoiceDialog::backdrop{background:rgba(24,38,32,.55);backdrop-filter:blur(3px)}
+#wishVoiceDialog *{box-sizing:border-box}
+#wishVoiceDialog .wv-shell{display:flex;flex-direction:column;max-height:calc(100dvh - 36px)}
+#wishVoiceDialog .wv-header{position:static;display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none;background:#fffcf6;border-bottom:1px solid #e5e3d9;padding:10px 20px;backdrop-filter:none;font-size:14px;font-weight:700}
+#wishVoiceDialog button{appearance:none;cursor:pointer;font-family:"Noto Sans KR","Malgun Gothic",sans-serif;min-height:44px;line-height:1.5}
+#wishVoiceDialog .wv-header button{background:transparent;border:0;color:#42594c;padding:8px 12px;font-size:14px;font-weight:700}
+#wishVoiceDialog .wv-body{overflow:auto;overscroll-behavior:contain;padding:24px 25px 28px;min-height:0}
+#wishVoiceDialog .wv-footer{flex:none;padding:8px 25px 16px;border-top:1px solid #e5e3d9;background:#fffcf6}
+#wishVoiceDialog .wv-progress-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#647062}
+#wishVoiceDialog progress{appearance:none;width:100%;height:5px;margin:12px 0 25px;border:none;border-radius:4px;background:#e4e8dd;color:#8b7547}
+#wishVoiceDialog progress::-webkit-progress-bar{background:#e4e8dd;border-radius:4px}
+#wishVoiceDialog progress::-webkit-progress-value{background:#8b7547;border-radius:4px}
+#wishVoiceDialog progress::-moz-progress-bar{background:#8b7547;border-radius:4px}
+#wishVoiceDialog h2{font-family:"Nanum Myeongjo",serif;font-size:26px;line-height:1.5;letter-spacing:-.045em;margin:8px 0 12px;word-break:keep-all}
+#wishVoiceDialog #wvHint{font-size:15px;line-height:1.7;color:#5b665a;margin:0 0 8px;word-break:keep-all}
+#wishVoiceDialog .wv-read{background:transparent;border:0;padding:8px 0;text-decoration:underline;text-underline-offset:4px;font-size:14px;color:#294238}
+#wishVoiceDialog .wv-current{font-size:13px;line-height:1.65;padding:12px 14px;background:#f0f0e8;border-radius:10px;color:#5b6356;overflow-wrap:anywhere;margin:12px 0 18px;white-space:pre-wrap}
+#wishVoiceDialog .wv-choices{display:grid;gap:8px;margin:0 0 20px}
+#wishVoiceDialog .wv-choices:empty{display:none}
+#wishVoiceDialog .wv-choices button{padding:11px 14px;text-align:left;font-size:15px;border:1px solid #d5ddcf;background:#fff;color:#344b3e;border-radius:11px}
+#wishVoiceDialog .wv-choices button[aria-pressed="true"]{background:#e6eddf;border:2px solid #294238;padding:10px 13px;font-weight:700}
+#wishVoiceDialog label{display:block;margin:0 0 8px;font-size:14px;font-weight:700;color:#344b3e}
+#wishVoiceDialog textarea{display:block;width:100%;min-height:120px;resize:vertical;background:#fff;border:1px solid #becbb9;border-radius:12px;padding:14px;font:400 17px/1.75 "Malgun Gothic",sans-serif;color:#263d33;margin:0}
+#wishVoiceDialog textarea[readonly]{background:#f5f6f1}
+#wishVoiceDialog .wv-interim{font-size:14px;line-height:1.6;color:#6b7064;margin:9px 0;min-height:0}
+#wishVoiceDialog .wv-interim:empty{display:none}
+#wishVoiceDialog .wv-mic{display:flex;justify-content:center;align-items:center;gap:10px;border:1px solid #294238;background:#edf2e7;color:#294238;border-radius:12px;width:100%;min-height:56px;margin:14px 0 0;padding:12px;font-size:17px;font-weight:700}
+#wishVoiceDialog .wv-mic.is-listening{background:#8a4839;color:#fff;border-color:#8a4839}
+#wishVoiceDialog .wv-status{font-size:14px;line-height:1.7;color:#374f40;margin:12px 0}
+#wishVoiceDialog .wv-privacy{font-size:12px;line-height:1.65;color:#626b5e;margin:12px 0 18px}
+#wishVoiceDialog .wv-storage{font-size:13px;line-height:1.6;color:#8a4839;margin:12px 0}
+#wishVoiceDialog .wv-storage:empty{display:none}
+#wishVoiceDialog .wv-nav{display:flex;justify-content:space-between;gap:12px;margin:0 0 8px}
+#wishVoiceDialog .wv-nav button,#wvDocument,#wvAgain{border:1px solid #cbd5c5;border-radius:10px;background:#fff;color:#344b3e;padding:10px 14px;font-size:14px}
+#wishVoiceDialog .wv-nav button{flex:1}
+#wishVoiceDialog button:disabled{opacity:.45;cursor:default}
+#wishVoiceDialog [hidden]{display:none!important}
+#wishVoiceDialog :focus-visible,#plan .wv-intro button:focus-visible,#plan .wv-field-button:focus-visible{outline:3px solid #9c7938;outline-offset:3px}
+#wishVoiceDialog #wvTitle:focus{outline:0}
+#wishVoiceDialog .wv-finish-mark{display:grid;place-items:center;width:54px;height:54px;background:#e4ecde;border-radius:50%;font-size:28px;margin:0 0 20px}
+#wishVoiceDialog #wvDone h3{font-size:23px;line-height:1.6;margin:10px 0}
+#wishVoiceDialog #wvDone p{font-size:16px;line-height:1.8;margin:12px 0 24px}
+#wishVoiceDialog #wvDone button{margin:10px 0;width:100%}
+@media(max-width:380px){#wishVoiceDialog{width:calc(100% - 12px);border-radius:16px}#wishVoiceDialog .wv-body{padding:20px 17px 24px}#wishVoiceDialog .wv-footer{padding:8px 17px 12px}#wishVoiceDialog h2{font-size:23px}#plan .wv-intro{padding:22px 18px}#plan .wv-intro h3{font-size:23px}}
+@media print{#wishVoiceIntro,.wv-field-button,#wishVoiceDialog{display:none!important}}
