@@ -1,0 +1,11 @@
+/* Fit the complete three-row menu above the fixed navigation on phones. */
+@media (max-width: 600px) {
+  #home .heroCopy { padding-bottom: 16px; }
+  #home .heroCopy .heroMainSlogan { margin-top: 14px !important; margin-bottom: 0; }
+  #home .heroMenu { margin-top: 12px !important; }
+  #home .heroPhotoSlider { width: 100%; max-height: var(--home-photo-room, none); }
+  #home .heroSlide .heroPhoto {
+    height: auto;
+    aspect-ratio: 6 / 5;
+  }
+}
