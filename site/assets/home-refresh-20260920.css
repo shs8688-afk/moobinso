@@ -1,4 +1,5 @@
 /* Homepage image refresh, 2026-09-20. Scoped to preserve inner pages. */
+#home .heroCopy { background: #eef3e2; }
 #home .heroPhotoSlider {
   height: auto;
   /* Keep 94% of the original height, cropping only the top of each photo. */
