@@ -15,7 +15,7 @@
 }
 #home .heroSlideCaption.top {
   padding: 25px 24px 48px;
-  background: linear-gradient(180deg, rgba(255,252,245,.94) 0%, rgba(255,252,245,.80) 40%, rgba(255,252,245,0) 100%);
+  background: linear-gradient(180deg, rgba(255,252,245,.65) 0%, rgba(255,252,245,.28) 25%, rgba(255,252,245,0) 65%);
 }
 #home .heroSlideCaption b.capSmall {
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;

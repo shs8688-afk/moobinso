@@ -1,0 +1,84 @@
+/* Homepage slogan and six section titles: Gothic type, 90% of prior size. */
+#home .homeSlogan {
+  font-family: Arial, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif !important;
+  font-size: 28.8px !important;
+}
+@media (max-width: 430px) {
+  #home .benefitHome .benefitTitle { font-size: 26.1px !important; }
+}
+@media (max-width: 420px) {
+  #home .homeSlogan { font-size: 26.1px !important; }
+}
+@media (max-width: 360px) {
+  #home .homeSlogan,
+  #home .benefitHome .benefitTitle { font-size: 24.3px !important; }
+}
+
+/* Hero photo titles use Gothic; the introductory slogan returns to Myeongjo. */
+#home .heroSlideCaption span.capLarge {
+  font-family: Arial, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-weight: 700;
+}
+#home .heroCopy .heroMainSlogan {
+  font-family: Georgia, "Nanum Myeongjo", "Apple SD Gothic Neo", serif !important;
+}
+#home .heroCopy .heroMainSlogan .sloganAccent { transform: translateX(.5em); }
+
+/* Reduce section heading weight, including separately styled gold phrases. */
+#home h2.homeSlogan { font-weight: 600; }
+#home h2.homeSlogan .sloganAccent,
+#home h2.homeSlogan .titleGoldInline,
+#home h2.homeSlogan .titleGoldLine { font-weight: 700; }
+
+#home .homeSlogan .titleParticleGap { padding-left: .16em; }
+
+footer .operatorInfo { font-size: 15px; }
+
+#home .homeAboutInvitation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 25px 24px;
+  background: #f8f5ee;
+  border-bottom: 1px solid #e8e3d8;
+}
+#home .homeAboutInvitation p {
+  display: grid;
+  margin: 0;
+  color: #4f5c55;
+  font-size: 16px;
+  line-height: 1.72;
+  word-break: keep-all;
+}
+/* Retain the previous text-column width so the button does not shift. */
+#home .homeAboutInvitation p::before {
+  content: "이별예식장이 생각하는";
+  visibility: hidden;
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+#home .homeAboutInvitation .aboutInvitationLines {
+  grid-area: 1 / 1;
+  justify-self: start;
+  text-align: right;
+  white-space: nowrap;
+}
+#home .homeAboutInvitation button {
+  appearance: none;
+  flex: 0 0 auto;
+  padding: 12px 14px;
+  border: 1px solid #b9c4b9;
+  border-radius: 10px;
+  background: #fffdf9;
+  color: #294238;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 700;
+  cursor: pointer;
+}
+@media (max-width: 360px) {
+  #home .homeAboutInvitation { padding: 22px 18px; gap: 8px; }
+  #home .homeAboutInvitation button { padding: 10px; font-size: 13px; }
+}
