@@ -705,6 +705,10 @@ function go(id){
  const pageId=qIndex>=0?id.slice(0,qIndex):id;
  const query=qIndex>=0?id.slice(qIndex+1):'';
  const target=document.getElementById(pageId);
+ if(document.querySelector('#home.page.active') && pageId!=='home'){
+  homeScrollY=window.scrollY;
+  try{sessionStorage.setItem('farewellHomeScrollY',String(homeScrollY));}catch(e){}
+ }
 
  if(!target){
   const url=PAGE_URLS[pageId]||'/';
@@ -1183,6 +1187,7 @@ function refreshMyPage(){
   document.addEventListener('click',function(event){
     var btn=event.target.closest('.bottomHomeBtn');
     if(!btn) return;
+    try{sessionStorage.setItem('farewellRestoreHome','1');}catch(e){}
     go('home');
   });
 
@@ -1263,4 +1268,17 @@ function refreshMyPage(){
 
   render();
   startAuto();
+})();
+
+// Restore the originating homepage position only for the bottom return action.
+(function(){
+ if(!document.querySelector('#home.page.active'))return;
+ let restore=false;try{restore=sessionStorage.getItem('farewellRestoreHome')==='1';sessionStorage.removeItem('farewellRestoreHome');}catch(e){}
+ if(!restore)return;
+ if('scrollRestoration' in history)history.scrollRestoration='manual';
+ async function finish(){
+  if(document.fonts)await document.fonts.ready;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:homeScrollY,left:0,behavior:'instant'})));
+ }
+ if(document.readyState==='complete')finish();else window.addEventListener('load',finish,{once:true});
 })();

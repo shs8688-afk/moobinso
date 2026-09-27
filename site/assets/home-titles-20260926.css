@@ -14,11 +14,7 @@
   #home .benefitHome .benefitTitle { font-size: 24.3px !important; }
 }
 
-/* Hero photo titles use Gothic; the introductory slogan returns to Myeongjo. */
-#home .heroSlideCaption span.capLarge {
-  font-family: Arial, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
-  font-weight: 700;
-}
+/* Hero captions retain the original Gothic subtitle and Myeongjo title styles. */
 #home .heroCopy .heroMainSlogan {
   font-family: Georgia, "Nanum Myeongjo", "Apple SD Gothic Neo", serif !important;
 }
@@ -82,3 +78,9 @@ footer .operatorInfo { font-size: 15px; }
   #home .homeAboutInvitation { padding: 22px 18px; gap: 8px; }
   #home .homeAboutInvitation button { padding: 10px; font-size: 13px; }
 }
+
+#home .homeAboutInvitation .invitationGold { color:#b58d49; }
+#home .homeAboutInvitation .aboutButtonLabel { display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+#home .homeAboutInvitation .aboutButtonArrow { display:inline-block; width:12px; height:12px; flex:none; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+#home .homeAboutInvitation > p, #home .homeAboutInvitation > button { transform:translateX(-32px); }
+@media(max-width:360px) { #home .homeAboutInvitation > p, #home .homeAboutInvitation > button { transform:translateX(-16px); } }

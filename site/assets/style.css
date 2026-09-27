@@ -2146,7 +2146,7 @@ footer {
 
 .operatorInfo {
   padding-top: 15px;
-  border-top: 1px solid rgba(255,255,255,.16);
+  border-top: none;
   color: #cbd5d0;
   font-size: 12px;
   line-height: 1.85;
@@ -3345,3 +3345,6 @@ body.menu-open{overflow:hidden}
 #no .costNote{margin:12px 1px 0;color:#7b776d;font-size:11px;line-height:1.65;}
 @media(min-width:760px){#no .costCompareGrid{grid-template-columns:1fr 1fr;}}
 @media(max-width:430px){#no .costCompareCard{padding:20px 18px;}#no .costBox{padding:17px 15px;}#no .costTotal strong{font-size:23px;}}
+
+/* Consistent business details on all pages. */
+footer .operatorInfo { font-size:15px; }
