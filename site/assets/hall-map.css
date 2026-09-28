@@ -3,7 +3,7 @@
 .finder-controls select{padding:10px;border:1px solid #bac7bd;border-radius:8px;background:#fff;font:inherit;max-width:100%}
 .finder-toggle{display:flex;align-items:center;gap:7px;font-size:14px}
 .finder-toggle input{width:20px;height:20px;accent-color:#294238}
-.finder-map{height:380px;background:#eef2ec;border:1px solid #d7dfd6;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.finder-map{height:323px;background:#eef2ec;border:1px solid #d7dfd6;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
 .finder-map p{max-width:280px;padding:20px;line-height:1.8}
 .finder-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;margin:12px 0}
 .finder-legend>span{display:inline-flex;align-items:center;white-space:nowrap}.finder-legend img{display:inline-block;flex:none}
@@ -15,7 +15,7 @@
 .finder-selection [data-close]{float:right}.finder-list{list-style:none;padding:0;margin:12px 0 24px}.finder-list li{border-bottom:1px solid #dce3da;padding:14px 0;line-height:1.7}.finder-list h4{font-family:inherit;font-size:17px;margin:0}.finder-list p{font-size:14px;margin:5px 0}.finder-list li.is-selected{background:#eef3e2}
 .finder h3{font-family:inherit;font-size:20px;margin-top:25px}.finder-empty{font-size:14px;color:#68746b;line-height:1.7}
 .finder [hidden]{display:none!important}.finder button:focus-visible,.finder a:focus-visible,.finder select:focus-visible{outline:3px solid #b58d49;outline-offset:3px}
-@media(max-width:430px){.finder{padding:0 20px 24px}.finder-map{height:340px}.finder-controls{align-items:flex-start;flex-direction:column}}
+@media(max-width:430px){.finder{padding:0 20px 24px}.finder-map{height:289px}.finder-controls{align-items:flex-start;flex-direction:column}}
 
 .finder .finder-toggle-inline{display:inline-flex;align-items:center;gap:6px;margin-left:8px;vertical-align:middle;max-width:100%;font-size:inherit}.finder .finder-toggle-inline input{flex:none;margin:0}.finder-intro{margin-top:20px}
 

@@ -698,7 +698,7 @@ function shareObituary(){
 
 let homeScrollY=0;
 try{homeScrollY=Number(sessionStorage.getItem('farewellHomeScrollY'))||0}catch(e){}
-const PAGE_URLS={"home": "/", "no": "/guide/", "ceremony": "/memorial/", "ceremonyHalls": "/memorial/venues/", "ceremonyHallDetail": "/memorial/venues/detail/", "service": "/funeral-service/", "reserve": "/funeral-service/reserve/", "itemDetail": "/funeral-service/item/", "halls": "/funeral-halls/", "hallDetail": "/funeral-halls/detail/", "additionalServices": "/support/additional/", "obituary": "/obituary/", "obituaryCreate": "/obituary/create/", "obituaryView": "/obituary/view/", "prepaid": "/prepaid-analysis/", "lifeTenShots": "/life-ten-shots/", "plan": "/farewell-note/", "faq": "/guide/faq/", "reviews": "/reviews/", "customerCenter": "/support/", "mypage": "/mypage/", "consult": "/consult/", "signup": "/signup/", "about": "/about/", "terms": "/terms/", "privacy": "/privacy/"};
+const PAGE_URLS={"home": "/", "no": "/guide/", "ceremony": "/memorial/", "ceremonyHalls": "/memorial/venues/", "planners": "/memorial/planners/", "plannerDetail": "/memorial/planners/detail/", "ceremonyHallDetail": "/memorial/venues/detail/", "service": "/funeral-service/", "reserve": "/funeral-service/reserve/", "itemDetail": "/funeral-service/item/", "halls": "/funeral-halls/", "hallDetail": "/funeral-halls/detail/", "additionalServices": "/support/additional/", "obituary": "/obituary/", "obituaryCreate": "/obituary/create/", "obituaryView": "/obituary/view/", "prepaid": "/prepaid-analysis/", "lifeTenShots": "/life-ten-shots/", "plan": "/farewell-note/", "faq": "/guide/faq/", "reviews": "/reviews/", "customerCenter": "/support/", "mypage": "/mypage/", "consult": "/consult/", "signup": "/signup/", "about": "/about/", "terms": "/terms/", "privacy": "/privacy/"};
 
 function go(id){
  const qIndex=id.indexOf('?');
@@ -1282,3 +1282,4 @@ function refreshMyPage(){
  }
  if(document.readyState==='complete')finish();else window.addEventListener('load',finish,{once:true});
 })();
+
