@@ -121,7 +121,7 @@ function filterHalls(){
  });
  const names={all:'수도권',seoul:'서울',gyeonggi:'경기',incheon:'인천'};
  const countEl=document.getElementById('regionCount');
- if(countEl) countEl.textContent=names[region]+' 장례식장 '+visible+'곳을 표시합니다.';
+ if(countEl) countEl.textContent=names[region]+' 안내 카드 '+visible+'개를 표시합니다.';
  const empty=document.getElementById('emptyHall');
  if(empty) empty.classList.toggle('show',visible===0);
 }
@@ -698,7 +698,7 @@ function shareObituary(){
 
 let homeScrollY=0;
 try{homeScrollY=Number(sessionStorage.getItem('farewellHomeScrollY'))||0}catch(e){}
-const PAGE_URLS={"home": "/", "no": "/guide/", "ceremony": "/memorial/", "ceremonyHalls": "/memorial/venues/", "planners": "/memorial/planners/", "plannerDetail": "/memorial/planners/detail/", "ceremonyHallDetail": "/memorial/venues/detail/", "service": "/funeral-service/", "reserve": "/funeral-service/reserve/", "itemDetail": "/funeral-service/item/", "halls": "/funeral-halls/", "hallDetail": "/funeral-halls/detail/", "additionalServices": "/support/additional/", "obituary": "/obituary/", "obituaryCreate": "/obituary/create/", "obituaryView": "/obituary/view/", "prepaid": "/prepaid-analysis/", "lifeTenShots": "/life-ten-shots/", "plan": "/farewell-note/", "faq": "/guide/faq/", "reviews": "/reviews/", "customerCenter": "/support/", "mypage": "/mypage/", "consult": "/consult/", "signup": "/signup/", "about": "/about/", "terms": "/terms/", "privacy": "/privacy/"};
+const PAGE_URLS={"home": "/", "no": "/guide/", "ceremony": "/memorial/", "ceremonyHalls": "/memorial/venues/", "ceremonyHallDetail": "/memorial/venues/detail/", "service": "/funeral-service/", "reserve": "/funeral-service/reserve/", "itemDetail": "/funeral-service/item/", "halls": "/funeral-halls/", "hallDetail": "/funeral-halls/detail/", "additionalServices": "/support/additional/", "obituary": "/obituary/", "obituaryCreate": "/obituary/create/", "obituaryView": "/obituary/view/", "prepaid": "/prepaid-analysis/", "lifeTenShots": "/life-ten-shots/", "plan": "/farewell-note/", "faq": "/guide/faq/", "reviews": "/reviews/", "customerCenter": "/support/", "mypage": "/mypage/", "consult": "/consult/", "signup": "/signup/", "about": "/about/", "terms": "/terms/", "privacy": "/privacy/"};
 
 function go(id){
  const qIndex=id.indexOf('?');
@@ -1282,4 +1282,3 @@ function refreshMyPage(){
  }
  if(document.readyState==='complete')finish();else window.addEventListener('load',finish,{once:true});
 })();
-

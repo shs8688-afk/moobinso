@@ -37,7 +37,8 @@
 }
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/assets/hall-map.css?v=20260928-v18">
+<link rel="stylesheet" href="/assets/hall-map.css?v=20261001-hall-panel">
+<link rel="stylesheet" href="/assets/seoul-halls.css?v=20261001-regions">
 </head>
 <body class="">
 <div class="shell">
@@ -77,7 +78,6 @@
 <div class="menuSub">
 <button onclick="go(&#39;ceremony&#39;)" type="button">이별추모식 소개</button>
 <button onclick="go(&#39;ceremonyHalls&#39;)" type="button">추모식장 찾기</button>
-<button onclick="go(&#39;planners&#39;)" type="button">이별플래너 소개</button>
 </div>
 </div>
 <div class="menuGroup">
@@ -86,7 +86,7 @@
 <button onclick="go(&#39;plan&#39;)" type="button">나의 이별 노트</button>
 <button onclick="location.href=&#39;https://bugo.moobinso.com/&#39;" type="button">무빈소용 모바일부고</button>
 <button onclick="go(&#39;prepaid&#39;)" type="button">선불상조 계약분석</button>
-<button onclick="go(&#39;lifeTenShots&#39;)" type="button">'인생 열컷' 영상</button>
+<button onclick="go(&#39;lifeTenShots&#39;)" type="button">인생열컷 자서전</button>
 </div>
 </div>
 <div class="menuGroup">
@@ -121,6 +121,19 @@
 <div class="hallTypeItem"><b>무빈소 '우대' 장례식장</b><p>이별예식장과 제휴한 장례식장으로, 무빈소를 전문으로 하는 만큼 서비스 수준이 높고 다양한 고객 혜택을 제공합니다. 장례서비스는 장례식장이 직접 제공하며, 상조회사 이용은 안 될 수 있습니다.</p></div>
 <div class="hallTypeItem"><b>무빈소 '가능' 장례식장</b><p>무빈소장례를 운영하는 장례식장입니다. 실시간 무빈소 이용 가능 여부는 이별예식장을 통해 확인 가능하며, 이별예식장 장례서비스를 이용하실 수 있습니다.</p></div>
 </div>
+<div class="regionSearch" aria-labelledby="hallRegionLabel">
+<label id="hallRegionLabel" for="hallRegion">지역 선택</label>
+<div class="regionSearchRow">
+<select id="hallRegion" aria-label="장례식장 지역 선택">
+<option value="all" selected>수도권</option>
+<option value="seoul">서울</option>
+<option value="gyeonggi">경기</option>
+<option value="incheon">인천</option>
+</select>
+<button class="btn" type="button" onclick="filterHalls()">검색</button>
+</div>
+<p class="regionCount" id="regionCount" role="status" aria-live="polite">수도권 안내 카드 6개를 표시합니다.</p>
+</div>
 <div class="card hallCard" data-region="seoul">
 <div class="tags"><span class="tag">서울</span><span class="tag">무빈소 우대 장례식장</span><span class="tag">추모식장 보유</span></div>
 <h3>서울 추모장례식장</h3>
@@ -145,24 +158,10 @@
 <div class="infoTable"><div class="infoLine"><span>위치</span><b>인천광역시 도심권</b></div><div class="infoLine"><span>주요 시설</span><b>안치실 9실 · 입관실 4실 · 추모공간 연계</b></div><div class="infoLine"><span>시설 소계</span><b>1,160,000원</b></div><div class="infoLine"><span>플랫폼 혜택</span><b>시설 8~15% 우대 · 제휴 장지 혜택</b></div></div>
 <div class="linkRow"><a class="smallBtn callBtn" href="tel:0320000000"><span class="callIcon" aria-hidden="true">☎️</span>이용 문의</a><button class="smallBtn" onclick="linkSoon(&#39;홈페이지&#39;)">홈페이지</button><button class="smallBtn" onclick="openReviews(&#39;incheon&#39;)">고객후기</button></div>
 </div>
-<div class="card hallCard" data-region="seoul">
-<div class="tags"><span class="tag">서울</span><span class="tag">무빈소 가능 장례식장</span></div>
-<h3>서울 은혜 장례식장</h3>
-<p class="sub">무빈소장례를 운영하는 장례식장입니다. 실시간 무빈소 이용 가능 여부는 이별예식장을 통해 확인 가능하며, 이별예식장 장례서비스를 이용하실 수 있습니다.</p>
-<div class="linkRow"><button class="smallBtn" onclick="linkSoon(&#39;지도&#39;)">지도</button><button class="smallBtn" onclick="linkSoon(&#39;홈페이지&#39;)">홈페이지</button></div>
-</div>
-<div class="card hallCard" data-region="gyeonggi">
-<div class="tags"><span class="tag">경기</span><span class="tag">무빈소 가능 장례식장</span></div>
-<h3>경기 늘푸른 장례식장</h3>
-<p class="sub">무빈소장례를 운영하는 장례식장입니다. 실시간 무빈소 이용 가능 여부는 이별예식장을 통해 확인 가능하며, 이별예식장 장례서비스를 이용하실 수 있습니다.</p>
-<div class="linkRow"><button class="smallBtn" onclick="linkSoon(&#39;지도&#39;)">지도</button><button class="smallBtn" onclick="linkSoon(&#39;홈페이지&#39;)">홈페이지</button></div>
-</div>
-<div class="card hallCard" data-region="incheon">
-<div class="tags"><span class="tag">인천</span><span class="tag">무빈소 가능 장례식장</span></div>
-<h3>인천 서로 장례식장</h3>
-<p class="sub">무빈소장례를 운영하는 장례식장입니다. 실시간 무빈소 이용 가능 여부는 이별예식장을 통해 확인 가능하며, 이별예식장 장례서비스를 이용하실 수 있습니다.</p>
-<div class="linkRow"><button class="smallBtn" onclick="linkSoon(&#39;지도&#39;)">지도</button><button class="smallBtn" onclick="linkSoon(&#39;홈페이지&#39;)">홈페이지</button></div>
-</div>
+
+<section class="seoulAvailableList hallCard" data-region="seoul" aria-labelledby="seoulAvailableTitle"><h3 id="seoulAvailableTitle">서울 무빈소 가능 장례식장</h3><p class="sub">실시간 무빈소 이용 가능 여부와 장례서비스 이용은 이별예식장 상담을 통해 확인하실 수 있습니다.</p><ol class="seoulHallRows" id="seoulAvailableRows" data-hall-list="/assets/hall-data/seoul-list.json"><li>서울 장례식장 목록을 불러오고 있습니다.</li></ol></section>
+<section class="seoulAvailableList hallCard" data-region="gyeonggi" aria-labelledby="gyeonggiAvailableTitle"><h3 id="gyeonggiAvailableTitle">경기 무빈소 가능 장례식장</h3><p class="sub">실시간 무빈소 이용 가능 여부와 장례서비스 이용은 이별예식장 상담을 통해 확인하실 수 있습니다.</p><ol class="seoulHallRows" id="gyeonggiAvailableRows" data-hall-list="/assets/hall-data/gyeonggi-list.json"><li>장례식장 목록을 불러오고 있습니다.</li></ol></section>
+<section class="seoulAvailableList hallCard" data-region="incheon" aria-labelledby="incheonAvailableTitle"><h3 id="incheonAvailableTitle">인천 무빈소 가능 장례식장</h3><p class="sub">실시간 무빈소 이용 가능 여부와 장례서비스 이용은 이별예식장 상담을 통해 확인하실 수 있습니다.</p><ol class="seoulHallRows" id="incheonAvailableRows" data-hall-list="/assets/hall-data/incheon-list.json"><li>장례식장 목록을 불러오고 있습니다.</li></ol></section>
 <div class="emptyHall" id="emptyHall">선택한 지역에 등록된 장례식장이 없습니다.</div>
 <div class="bottomHomeWrap"><button class="bottomHomeBtn" type="button">← 홈으로 돌아가기</button></div></section>
 
@@ -199,9 +198,10 @@
 </nav>
 
 </div>
-<script src="/assets/app.js?v=20260928-v19"></script>
+<script src="/assets/app.js?v=20261001-region-filter"></script>
 <script src="/assets/hall-map-config.js?v=20260927-v13"></script>
-<script src="/assets/hall-map.js?v=20260927-v17"></script>
+<script src="/assets/hall-map.js?v=20261001-hall-panel"></script>
+<script src="/assets/seoul-halls.js?v=20261001-regions"></script>
 </body></html>
 
 

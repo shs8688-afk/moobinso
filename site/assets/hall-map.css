@@ -3,7 +3,7 @@
 .finder-controls select{padding:10px;border:1px solid #bac7bd;border-radius:8px;background:#fff;font:inherit;max-width:100%}
 .finder-toggle{display:flex;align-items:center;gap:7px;font-size:14px}
 .finder-toggle input{width:20px;height:20px;accent-color:#294238}
-.finder-map{height:323px;background:#eef2ec;border:1px solid #d7dfd6;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.finder-map{height:380px;background:#eef2ec;border:1px solid #d7dfd6;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
 .finder-map p{max-width:280px;padding:20px;line-height:1.8}
 .finder-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;margin:12px 0}
 .finder-legend>span{display:inline-flex;align-items:center;white-space:nowrap}.finder-legend img{display:inline-block;flex:none}
@@ -15,7 +15,7 @@
 .finder-selection [data-close]{float:right}.finder-list{list-style:none;padding:0;margin:12px 0 24px}.finder-list li{border-bottom:1px solid #dce3da;padding:14px 0;line-height:1.7}.finder-list h4{font-family:inherit;font-size:17px;margin:0}.finder-list p{font-size:14px;margin:5px 0}.finder-list li.is-selected{background:#eef3e2}
 .finder h3{font-family:inherit;font-size:20px;margin-top:25px}.finder-empty{font-size:14px;color:#68746b;line-height:1.7}
 .finder [hidden]{display:none!important}.finder button:focus-visible,.finder a:focus-visible,.finder select:focus-visible{outline:3px solid #b58d49;outline-offset:3px}
-@media(max-width:430px){.finder{padding:0 20px 24px}.finder-map{height:289px}.finder-controls{align-items:flex-start;flex-direction:column}}
+@media(max-width:430px){.finder{padding:0 20px 24px}.finder-map{height:340px}.finder-controls{align-items:flex-start;flex-direction:column}}
 
 .finder .finder-toggle-inline{display:inline-flex;align-items:center;gap:6px;margin-left:8px;vertical-align:middle;max-width:100%;font-size:inherit}.finder .finder-toggle-inline input{flex:none;margin:0}.finder-intro{margin-top:20px}
 
@@ -24,3 +24,23 @@
 .finder .finder-legend label{display:inline-flex;align-items:center;gap:5px;margin:0;padding:0;line-height:1.7;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer}
 .finder .finder-legend input{appearance:auto;width:17px;height:17px;min-height:0;padding:0;margin:0;flex:none;accent-color:#315749}
 .finder .finder-legend b{margin:0}.finder .finder-legend img{margin:0;display:inline-block;width:18px;height:22px}
+
+/* 선택한 지도 시설의 접이식 상세정보 패널 */
+.finder-map{height:380px}
+.finder-selection{position:relative;padding:16px 16px 14px;background:#fffdf8;border:1px solid #d9caa6;border-radius:16px;margin:12px 0 18px;box-shadow:0 8px 22px rgba(41,66,56,.08)}
+.finder-selection-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.finder-selection-identity{min-width:0;flex:1}
+.finder-selection-identity small{display:block;color:#896626;font-weight:700;margin-bottom:3px}
+.finder-selection-identity h3{font-family:inherit;font-size:19px;margin:0 0 5px}
+.finder-selection-identity p{font-size:13px;line-height:1.55;margin:0;color:#626b65}
+.finder-selection-controls{display:flex;flex-direction:column;align-items:stretch;gap:5px;flex:none}
+.finder-selection-controls button{margin:0;padding:7px 9px;font-size:12px;white-space:nowrap}
+.finder-selection-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.finder-selection-actions a{margin:0;font-size:13px;padding:8px 10px}
+.finder-selection-extra{display:none;border-top:1px solid #e6dfd1;margin-top:13px;padding-top:9px}
+.finder-selection.is-expanded .finder-selection-extra{display:block}
+.finder-selection-extra p{margin:5px 0;font-size:13px;line-height:1.6}
+.finder-selection-note{color:#6d756f}
+@media(max-width:430px){.finder-map{height:280px}.finder-selection{padding:14px}.finder-selection-head{gap:8px}.finder-selection-controls button{padding:6px 8px}.finder-selection-actions a{flex:1 1 auto;text-align:center}}
+
+
