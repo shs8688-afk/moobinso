@@ -121,7 +121,7 @@
       const colors = {preferred:'#98732d',available:'#315749',crematory:'#436b86'};
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="42"><rect x="1" y="1" width="34" height="34" rx="${p.type==='crematory'?3:17}" fill="${colors[p.type]}" stroke="white" stroke-width="2"/><text x="18" y="25" text-anchor="middle" fill="white" font-size="22">${symbols[p.type]}</text><path d="M13 34L18 41L23 34" fill="${colors[p.type]}"/></svg>`;
       const crematory = p.type === 'crematory';
-      const marker = new kakao.maps.Marker({position,title:p.name,image:new kakao.maps.MarkerImage(crematory ? '/assets/crematory-marker.svg' : 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg),new kakao.maps.Size(crematory ? 26 : 36,crematory ? 32 : 42),{offset:new kakao.maps.Point(crematory ? 13 : 18,crematory ? 31 : 41)})});
+      const marker = new kakao.maps.Marker({position,title:p.name,image:new kakao.maps.MarkerImage(crematory ? '/assets/crematory-marker.svg' : 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg),new kakao.maps.Size(crematory ? 21 : 28,crematory ? 26 : 34),{offset:new kakao.maps.Point(crematory ? 10 : 14,crematory ? 25 : 33)})});
       kakao.maps.event.addListener(marker,'click',()=>select(p)); markers.set(p.id,marker); bounds.extend(position);
     }
     for (const type of Object.keys(clusters)) clusters[type].addMarkers(rows.filter(p=>p.type===type).map(p=>markers.get(p.id)));
@@ -142,7 +142,7 @@
       canvas.replaceChildren();
       map=new kakao.maps.Map(canvas,{center:new kakao.maps.LatLng(37.5,126.98),level:10});
       map.addControl(new kakao.maps.ZoomControl(),kakao.maps.ControlPosition.RIGHT);
-      for(const type of ['preferred','available','crematory']) clusters[type]=new kakao.maps.MarkerClusterer({map,averageCenter:true,minLevel:8,minClusterSize:3,calculator:[10,30,50],texts:n=>type==='crematory'?'화장 '+n:symbols[type]+' '+n,styles:[{width:'42px',height:type==='crematory'?'32px':'42px',fontSize:'12px',borderRadius:type==='crematory'?'4px':'50%',background:type==='preferred'?'#98732d':type==='available'?'#315749':'#436b86',color:'#fff',textAlign:'center',lineHeight:type==='crematory'?'32px':'42px',fontWeight:'700'}]});
+      for(const type of ['preferred','available','crematory']) clusters[type]=new kakao.maps.MarkerClusterer({map,averageCenter:true,minLevel:8,minClusterSize:3,calculator:[10,30,50],texts:n=>type==='crematory'?'화장 '+n:symbols[type]+' '+n,styles:[{width:'34px',height:type==='crematory'?'26px':'34px',fontSize:'11px',borderRadius:type==='crematory'?'4px':'50%',background:type==='preferred'?'#98732d':type==='available'?'#315749':'#436b86',color:'#fff',textAlign:'center',lineHeight:type==='crematory'?'26px':'34px',fontWeight:'700'}]});
       render();
     } catch(e) { console.error('Hall map loading failed:', e.message); map=null; message('지도를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.'); }
   }

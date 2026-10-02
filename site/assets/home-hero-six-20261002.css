@@ -1,0 +1,9 @@
+/* Approved six-photo hero artwork includes the exact preview typography. */
+#home .heroPhotoSlider { aspect-ratio: 1680 / 936; height: auto; max-height: none; }
+#home .heroSlide .heroPhoto { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; object-position: center; }
+/* Keep semantic captions available to assistive technology without duplicating artwork text. */
+#home .heroSlideCaption.top { position: absolute; inset: auto; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; background: none; border: 0; }
+
+/* White service index and soft sky-blue company invitation. */
+#home .heroCopy { background: #ffffff; }
+#home .homeAboutInvitation { background: #edf5f8; }
